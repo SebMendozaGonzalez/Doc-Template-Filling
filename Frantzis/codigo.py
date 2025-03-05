@@ -15,7 +15,7 @@ def create_docs(df: pd.DataFrame) -> None:
         doc_copy = Document("./document_template.docx")
         
         patient_name: str = df.iloc[i,0]
-        df_code: str = df.iloc[i,1]
+        sf_code: str = df.iloc[i,1]
         med_facility: str = df.iloc[i,2]
         date_of_loss = df.iloc[i, 3]
         billing_amount: str = df.iloc[i, 4]
@@ -35,9 +35,9 @@ def create_docs(df: pd.DataFrame) -> None:
                     para.text = f"This letter shall serve as notice that {med_facility} holds a balance with your client, {dic2['Patient/Plaintiff: ']}."
                     
                     
-        doc_copy.save(f"./documentos/modified{i}.docx")
+        doc_copy.save(f"./documentos/{sf_code}_{patient_name}.docx")
         
-        convert(f"./documentos/modified{i}.docx", f"./pdfs/modified{i}.pdf")
+        convert(f"./documentos/{sf_code}_{patient_name}.docx", f"./pdfs/{sf_code}_{patient_name}.pdf")
 
 
 if __name__ == "__main__":
